@@ -68,19 +68,18 @@
             insult.innerHTML = "Hello Friend!";
             const button = document.querySelector("#insult-button");
             button.onclick = () => {
-                while (true) {
-                    let random = Math.floor(Math.random() * insults.length);
-                    console.log(random);
-                    if (insults[random] != insultText) {
-                        insultText = insults[random];
-                        console.log(insultText);
-                        insult.innerHTML = insultText;
-                        break;
-                    }
+                if (insults.length == 0) {
+                    insults = refresh;
+                    refresh = [];
                 }
+                let random = Math.floor(Math.random() * insults.length);
+                insultText = insults[random];
+                refresh.push(insults.splice(random, 1));
+                insult.innerHTML = insultText;
+                console.log(insults.length);
             };
 
-            const insults = [
+            let insults = [
                 "You’re my favorite person besides every other person I’ve ever met.",
                 "No offense, but you make me want to staple my cunt shut.",
                 "Did your parents have any children that lived?",
@@ -181,6 +180,7 @@
                 "You’re about as useful as tits on a pigeon.",
                 "Why are you playing hard to get when you’re so hard to want?",
             ];
+            let refresh = [];
         </script>
     </body>
 </html>
